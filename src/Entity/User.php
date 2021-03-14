@@ -11,14 +11,10 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
- * @ORM\Table(name="symfony_demo_user")
- *
  * Defines the properties of the User entity to represent the application users.
  * See https://symfony.com/doc/current/doctrine.html#creating-an-entity-class
  *
@@ -32,25 +28,17 @@ class User implements UserInterface, \Serializable
 {
     /**
      * @var int
-     *
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string")
      * @Assert\NotBlank()
      */
     private $fullName;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string", unique=true)
      * @Assert\NotBlank()
      * @Assert\Length(min=2, max=50)
      */
@@ -58,23 +46,17 @@ class User implements UserInterface, \Serializable
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string", unique=true)
      * @Assert\Email()
      */
     private $email;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string")
      */
     private $password;
 
     /**
      * @var array
-     *
-     * @ORM\Column(type="json")
      */
     private $roles = [];
 

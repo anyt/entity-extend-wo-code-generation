@@ -13,13 +13,10 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\PostRepository")
- * @ORM\Table(name="symfony_demo_post")
  * @UniqueEntity(fields={"slug"}, errorPath="title", message="post.slug_unique")
  *
  * Defines the properties of the Post entity to represent the blog posts.
@@ -37,32 +34,22 @@ class Post
 {
     /**
      * @var int
-     *
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string")
      * @Assert\NotBlank
      */
     private $title;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string")
      */
     private $slug;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string")
      * @Assert\NotBlank(message="post.blank_summary")
      * @Assert\Length(max=255)
      */
@@ -70,8 +57,6 @@ class Post
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="text")
      * @Assert\NotBlank(message="post.blank_content")
      * @Assert\Length(min=10, minMessage="post.too_short_content")
      */
@@ -79,38 +64,21 @@ class Post
 
     /**
      * @var \DateTime
-     *
-     * @ORM\Column(type="datetime")
      */
     private $publishedAt;
 
     /**
      * @var User
-     *
-     * @ORM\ManyToOne(targetEntity="App\Entity\User")
-     * @ORM\JoinColumn(nullable=false)
      */
     private $author;
 
     /**
      * @var Comment[]|Collection
-     *
-     * @ORM\OneToMany(
-     *      targetEntity="Comment",
-     *      mappedBy="post",
-     *      orphanRemoval=true,
-     *      cascade={"persist"}
-     * )
-     * @ORM\OrderBy({"publishedAt": "DESC"})
      */
     private $comments;
 
     /**
      * @var Tag[]|Collection
-     *
-     * @ORM\ManyToMany(targetEntity="App\Entity\Tag", cascade={"persist"})
-     * @ORM\JoinTable(name="symfony_demo_post_tag")
-     * @ORM\OrderBy({"name": "ASC"})
      * @Assert\Count(max="4", maxMessage="post.too_many_tags")
      */
     private $tags;
