@@ -11,8 +11,9 @@
 
 namespace App\Entity;
 
+use App\Doctrine\Entity\ExtendedEntityInterface;
+use App\Doctrine\Entity\ExtendedEntityTrait;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Defines the properties of the User entity to represent the application users.
@@ -24,8 +25,10 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @author Ryan Weaver <weaverryan@gmail.com>
  * @author Javier Eguiluz <javier.eguiluz@gmail.com>
  */
-class User implements UserInterface, \Serializable
+class User implements UserInterface, \Serializable, ExtendedEntityInterface
 {
+    use ExtendedEntityTrait;
+
     /**
      * @var int
      */
@@ -33,22 +36,8 @@ class User implements UserInterface, \Serializable
 
     /**
      * @var string
-     * @Assert\NotBlank()
-     */
-    private $fullName;
-
-    /**
-     * @var string
-     * @Assert\NotBlank()
-     * @Assert\Length(min=2, max=50)
      */
     private $username;
-
-    /**
-     * @var string
-     * @Assert\Email()
-     */
-    private $email;
 
     /**
      * @var string
@@ -65,16 +54,6 @@ class User implements UserInterface, \Serializable
         return $this->id;
     }
 
-    public function setFullName(string $fullName): void
-    {
-        $this->fullName = $fullName;
-    }
-
-    public function getFullName(): ?string
-    {
-        return $this->fullName;
-    }
-
     public function getUsername(): ?string
     {
         return $this->username;
@@ -83,16 +62,6 @@ class User implements UserInterface, \Serializable
     public function setUsername(string $username): void
     {
         $this->username = $username;
-    }
-
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): void
-    {
-        $this->email = $email;
     }
 
     public function getPassword(): ?string

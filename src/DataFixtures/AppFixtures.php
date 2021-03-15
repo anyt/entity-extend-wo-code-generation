@@ -79,7 +79,7 @@ class AppFixtures extends Fixture
             $post->setContent($content);
             $post->setPublishedAt($publishedAt);
             $post->setAuthor($author);
-            $post->addTag(...$tags);
+            $post->addTags(...$tags);
 
             foreach (range(1, 5) as $i) {
                 $comment = new Comment();
@@ -87,7 +87,7 @@ class AppFixtures extends Fixture
                 $comment->setContent($this->getRandomText(random_int(255, 512)));
                 $comment->setPublishedAt(new \DateTime('now + '.$i.'seconds'));
 
-                $post->addComment($comment);
+                $post->addComments($comment);
             }
 
             $manager->persist($post);

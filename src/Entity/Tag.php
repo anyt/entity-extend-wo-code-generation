@@ -11,6 +11,9 @@
 
 namespace App\Entity;
 
+use App\Doctrine\Entity\ExtendedEntityInterface;
+use App\Doctrine\Entity\ExtendedEntityTrait;
+
 /**
  * Defines the properties of the Tag entity to represent the post tags.
  *
@@ -18,32 +21,14 @@ namespace App\Entity;
  *
  * @author Yonel Ceruto <yonelceruto@gmail.com>
  */
-class Tag implements \JsonSerializable
+class Tag implements \JsonSerializable, ExtendedEntityInterface
 {
+    use ExtendedEntityTrait;
+
     /**
      * @var int
      */
     private $id;
-
-    /**
-     * @var string
-     */
-    private $name;
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
-    public function setName(string $name): void
-    {
-        $this->name = $name;
-    }
-
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
 
     /**
      * {@inheritdoc}

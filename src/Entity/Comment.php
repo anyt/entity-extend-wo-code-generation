@@ -11,6 +11,8 @@
 
 namespace App\Entity;
 
+use App\Doctrine\Entity\ExtendedEntityInterface;
+use App\Doctrine\Entity\ExtendedEntityTrait;
 use function Symfony\Component\String\u;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -24,39 +26,14 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @author Ryan Weaver <weaverryan@gmail.com>
  * @author Javier Eguiluz <javier.eguiluz@gmail.com>
  */
-class Comment
+class Comment implements ExtendedEntityInterface
 {
+    use ExtendedEntityTrait;
+
     /**
      * @var int
      */
     private $id;
-
-    /**
-     * @var Post
-     */
-    private $post;
-
-    /**
-     * @var string
-     * @Assert\NotBlank(message="comment.blank")
-     * @Assert\Length(
-     *     min=5,
-     *     minMessage="comment.too_short",
-     *     max=10000,
-     *     maxMessage="comment.too_long"
-     * )
-     */
-    private $content;
-
-    /**
-     * @var \DateTime
-     */
-    private $publishedAt;
-
-    /**
-     * @var User
-     */
-    private $author;
 
     public function __construct()
     {
@@ -76,45 +53,5 @@ class Comment
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getContent(): ?string
-    {
-        return $this->content;
-    }
-
-    public function setContent(string $content): void
-    {
-        $this->content = $content;
-    }
-
-    public function getPublishedAt(): \DateTime
-    {
-        return $this->publishedAt;
-    }
-
-    public function setPublishedAt(\DateTime $publishedAt): void
-    {
-        $this->publishedAt = $publishedAt;
-    }
-
-    public function getAuthor(): ?User
-    {
-        return $this->author;
-    }
-
-    public function setAuthor(User $author): void
-    {
-        $this->author = $author;
-    }
-
-    public function getPost(): ?Post
-    {
-        return $this->post;
-    }
-
-    public function setPost(Post $post): void
-    {
-        $this->post = $post;
     }
 }
