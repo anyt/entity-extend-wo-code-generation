@@ -8,6 +8,7 @@ parameters:
     # This parameter defines the codes of the locales (languages) enabled in the application
     app_locales: ar|en|fr|de|es|cs|nl|ru|uk|ro|pt_BR|pl|it|ja|id|ca|sl|hr|zh_CN|bg|tr|lt
     app.notifications.email_sender: anonymous@example.com
+    doctrine.orm.entity_manager.class: App\Doctrine\ExtendedEntityManager
 
 services:
     # default configuration for services in *this* file
@@ -26,6 +27,7 @@ services:
         exclude:
             - '../src/DependencyInjection/'
             - '../src/Entity/'
+            - '../src/Doctrine/'
             - '../src/Kernel.php'
             - '../src/Tests/'
 
